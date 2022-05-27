@@ -11,7 +11,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(int id, String name, String description, String created ) {
+    public Post(int id, String name, String description, String created) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -52,8 +52,12 @@ public class Post {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Post post = (Post) o;
         return id == post.id;
     }

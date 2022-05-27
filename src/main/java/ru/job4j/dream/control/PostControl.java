@@ -14,4 +14,5 @@ public class PostControl {
         model.addAttribute("posts", store.findAll());
         return "posts";
     }
+
 }

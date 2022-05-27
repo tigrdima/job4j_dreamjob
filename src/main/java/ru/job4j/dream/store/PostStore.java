@@ -16,7 +16,7 @@ public class PostStore {
         posts.put(2, new Post(2, "Middle Java Job",
                 "Стек технологий: Java 8. Messaging (желательно Kafka)", "20/05/2022"));
         posts.put(3, new Post(3, "Senior Java Job",
-                "Знание и опыт работы с web-технологиями, реляционными базами ","20/05/2022"));
+                "Знание и опыт работы с web-технологиями, реляционными базами ", "20/05/2022"));
     }
 
     public static PostStore instOf() {
