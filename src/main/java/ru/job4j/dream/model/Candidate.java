@@ -1,6 +1,5 @@
 package ru.job4j.dream.model;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class Candidate {
@@ -10,6 +9,11 @@ public class Candidate {
     private String created;
 
     public Candidate() {
+    }
+
+    public Candidate(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Candidate(int id, String name, String desc, String created) {
