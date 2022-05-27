@@ -19,6 +19,10 @@ public class PostStore {
                 "Знание и опыт работы с web-технологиями, реляционными базами ", "20/05/2022"));
     }
 
+    public void add(Post post) {
+        posts.put(post.getId(), post);
+    }
+
     public static PostStore instOf() {
         return INST;
     }
