@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -26,10 +27,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Главная <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" th:href="@{/posts}">Вакансии</a>
-                <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
+                <a class="nav-item nav-link active" th:href="@{/candidates}">Кандидаты</a>
                 <a class="nav-item nav-link" th:href="@{/formAddPost}">Добавить вакансию</a>
+                <a class="nav-item nav-link" th:href="@{/formAddCandidate}">Добавить кандидата</a>
             </div>
         </div>
     </nav>
@@ -38,7 +40,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Название вакансии</th>
+                <th scope="col">Имя кандидата</th>
                 <th scope="col">Описание</th>
                 <th scope="col">Дата создания</th>
             </tr>
@@ -46,8 +48,13 @@
             <tbody>
             <tr th:each="candidate:${candidates}">
                 <td th:text="${candidate.id}"></td>
-                <td th:text="${candidate.name}"></td>
-                <td th:text="${candidate.desc}"></td>
+                <td>
+                    <a th:href="@{|/formUpdateCandidate/${candidate.id}|}">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <span th:text="${candidate.name}"></span>
+                </td>
+                <td th:text="${candidate.description}"></td>
                 <td th:text="${candidate.created}"></td>"
             </tr>
             </tbody>
