@@ -20,7 +20,7 @@ public class PostControl {
 
     @GetMapping("/formAddPost")
     public String addPost(Model model) {
-        model.addAttribute("post", new Post(0, "Заполните поле"));
+        model.addAttribute("post", new Post());
         return "addPost";
     }
 
