@@ -12,7 +12,7 @@ public class PostStore {
     private final AtomicInteger id = new AtomicInteger();
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
-    private PostStore() {
+    public PostStore() {
         posts.put(1, new Post(1, "Junior Java Job",
                 "Понимание принципов ООП. Знание Spring Framework (Hibernate)", "20/05/2022"));
         posts.put(2, new Post(2, "Middle Java Job",
