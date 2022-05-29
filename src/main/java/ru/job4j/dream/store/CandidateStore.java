@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CandidateStore {
-    private final AtomicInteger id = new AtomicInteger();
+    private final AtomicInteger id = new AtomicInteger(4);
     private static final CandidateStore INST = new CandidateStore();
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
@@ -30,7 +30,8 @@ public class CandidateStore {
     }
 
     public void add(Candidate candidate) {
-        candidates.put(id.get(), candidate);
+        candidate.setId(id.incrementAndGet());
+        candidates.put(candidate.getId(), candidate);
     }
 
     public void update(Candidate candidate) {
