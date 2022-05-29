@@ -1,5 +1,6 @@
 package ru.job4j.dream.store;
 
+import org.springframework.stereotype.Repository;
 import ru.job4j.dream.model.Post;
 
 import java.util.Collection;
@@ -7,9 +8,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Repository
 public class PostStore {
-    private static final PostStore INST = new PostStore();
-    private final AtomicInteger id = new AtomicInteger(4);
+    private final AtomicInteger id = new AtomicInteger(3);
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
     public PostStore() {
@@ -32,10 +33,6 @@ public class PostStore {
 
     public void update(Post post) {
         posts.replace(post.getId(), post);
-    }
-
-    public static PostStore instOf() {
-        return INST;
     }
 
     public Collection<Post> findAll() {
