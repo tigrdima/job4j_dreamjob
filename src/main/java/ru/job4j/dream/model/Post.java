@@ -9,6 +9,7 @@ public class Post implements Serializable {
     private String description;
     private String created;
     private boolean visible;
+    private City city;
 
     public Post() {
     }
