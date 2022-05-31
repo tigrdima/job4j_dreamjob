@@ -3,10 +3,7 @@ package ru.job4j.dream.control;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.service.CityService;
 import ru.job4j.dream.service.PostService;
@@ -14,17 +11,17 @@ import ru.job4j.dream.service.PostService;
 @ThreadSafe
 @Controller
 public class PostControl {
-    private final PostService service;
+    private final PostService postService;
     private final CityService cityService;
 
     public PostControl(PostService service, CityService cityService) {
-        this.service = service;
+        this.postService = service;
         this.cityService = cityService;
     }
 
     @GetMapping("/posts")
     public String posts(Model model) {
-        model.addAttribute("posts", service.findAll());
+        model.addAttribute("posts", postService.findAll());
         return "posts";
     }
 
@@ -37,19 +34,22 @@ public class PostControl {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
-        service.add(post);
+        post.setCity(cityService.findById(post.getCity().getId()));
+        postService.add(post);
         return "redirect:/posts";
     }
 
     @PostMapping("/updatePost")
     public String updatePost(@ModelAttribute Post post) {
-        service.update(post);
+        post.setCity(cityService.findById(post.getCity().getId()));
+        postService.update(post);
         return "redirect:/posts";
     }
 
     @GetMapping("/formUpdatePost/{postId}")
     public String formUpdatePost(Model model, @PathVariable("postId") int id) {
-        model.addAttribute("post", service.findById(id));
+        model.addAttribute("post", postService.findById(id));
+        model.addAttribute("cities", cityService.findAll());
         return "updatePost";
     }
 }

@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.stereotype.Repository;
 import ru.job4j.dream.model.Candidate;
 
 import java.util.Collection;
@@ -10,9 +11,9 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @ThreadSafe
+@Repository
 public class CandidateStore {
     private final AtomicInteger id = new AtomicInteger(4);
-    private static final CandidateStore INST = new CandidateStore();
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
     private CandidateStore() {
@@ -25,10 +26,6 @@ public class CandidateStore {
         candidates.put(3, new Candidate(3, "Разработчик Java",
                 "Участвовать в качестве разработчика в проекте по созданию и развитию Платёжной Системы Банка России. ",
                 new Date().toString()));
-    }
-
-    public static CandidateStore instOf() {
-        return INST;
     }
 
     public void add(Candidate candidate) {

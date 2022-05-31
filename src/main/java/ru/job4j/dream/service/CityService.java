@@ -1,6 +1,5 @@
 package ru.job4j.dream.service;
 
-import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dream.model.City;
 
