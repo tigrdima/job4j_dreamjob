@@ -2,18 +2,22 @@ package ru.job4j.dream.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @ThreadSafe
 @Repository
 public class PostDBStore {
-
+    private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
     private final BasicDataSource pool;
 
     public PostDBStore(BasicDataSource pool) {
@@ -27,22 +31,26 @@ public class PostDBStore {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    posts.add(new Post(it.getInt("id"), it.getString("name")));
+                    posts.add(new Post(it.getInt("id"), it.getString("name"), it.getString("description"),
+                            it.getBoolean("visible"), new City(it.getInt("city_id")), it.getString("created")));
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
         return posts;
     }
 
     public Post add(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("INSERT INTO post(name, city_id) VALUES (?, ?)",
-                     PreparedStatement.RETURN_GENERATED_KEYS)
+             PreparedStatement ps =  cn.prepareStatement("INSERT INTO post(name, description, visible, city_id, created) "
+                             + "VALUES (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, post.getName());
-            ps.setInt(2, post.getCity().getId());
+            ps.setString(2, post.getDescription());
+            ps.setBoolean(3, post.isVisible());
+            ps.setInt(4, post.getCity().getId());
+            ps.setString(5, new Date().toString());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -50,21 +58,24 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
         return post;
     }
 
     public void update(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("UPDATE post SET name = ?, city_id = ? WHERE id = ?")
+             PreparedStatement ps =  cn.prepareStatement("UPDATE post SET name = ?, description = ?, "
+                     + "city_id = ?, created = ? WHERE id = ?")
         ) {
             ps.setString(1, post.getName());
-            ps.setInt(2, post.getCity().getId());
-            ps.setInt(3, post.getId());
+            ps.setString(2, post.getDescription());
+            ps.setInt(3, post.getCity().getId());
+            ps.setString(4, new Date().toString());
+            ps.setInt(5, post.getId());
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
     }
 
@@ -79,7 +90,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
         return null;
     }

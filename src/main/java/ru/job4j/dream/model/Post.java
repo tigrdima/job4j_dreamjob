@@ -7,11 +7,22 @@ public class Post implements Serializable {
     private int id;
     private String name;
     private String description;
-    private String created;
     private boolean visible;
     private City city;
+    private String created;
 
     public Post() {
+    }
+
+    public Post(String name, City city) {
+        this.name = name;
+        this.city = city;
+    }
+
+    public Post(int id, String name, City city) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
     }
 
     public Post(int id, String name) {
@@ -22,6 +33,15 @@ public class Post implements Serializable {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.created = created;
+    }
+
+    public Post(int id, String name, String description, boolean visible, City city, String created) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.visible = visible;
+        this.city = city;
         this.created = created;
     }
 

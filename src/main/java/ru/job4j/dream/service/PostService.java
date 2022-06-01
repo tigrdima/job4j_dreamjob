@@ -11,13 +11,12 @@ import java.util.List;
 @ThreadSafe
 @Service
 public class PostService {
-
     private final PostDBStore postDBStoree;
     private final CityService cityService;
 
-    public PostService(PostDBStore postDBStoree) {
+    public PostService(PostDBStore postDBStoree, CityService cityService) {
         this.postDBStoree = postDBStoree;
-        this.cityService = new CityService();
+        this.cityService = cityService;
     }
 
     public void add(Post post) {
@@ -39,6 +38,6 @@ public class PostService {
                         cityService.findById(post.getCity().getId())
                 )
         );
-        return postDBStoree.findAll();
+        return posts;
     }
 }
