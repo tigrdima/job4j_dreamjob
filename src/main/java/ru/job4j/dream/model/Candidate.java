@@ -30,6 +30,7 @@ public class Candidate {
         this.description = description;
         this.created = created;
         this.photo = photo;
+
     }
 
     public int getId() {

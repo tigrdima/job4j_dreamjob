@@ -39,6 +39,7 @@ public class CandidateDBStore {
         } catch (Exception e) {
             LOG.error("Error", e);
         }
+
         return candidates;
     }
 

@@ -38,6 +38,7 @@ public class PostDBStore {
         } catch (Exception e) {
             LOG.error("Error", e);
         }
+
         return posts;
     }
 

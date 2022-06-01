@@ -103,6 +103,7 @@ public class Post implements Serializable {
         }
         Post post = (Post) o;
         return id == post.id;
+
     }
 
     @Override
