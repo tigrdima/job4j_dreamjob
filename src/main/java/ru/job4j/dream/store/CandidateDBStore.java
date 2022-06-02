@@ -37,7 +37,7 @@ public class CandidateDBStore {
                 }
             }
         } catch (Exception e) {
-            LOG.error("Error", e);
+            LOG.error(e.getMessage(), e);
         }
 
         return candidates;
@@ -59,7 +59,7 @@ public class CandidateDBStore {
                 }
             }
         } catch (Exception e) {
-            LOG.error("Error", e);
+            LOG.error(e.getMessage(), e);
         }
         return candidate;
     }
@@ -76,7 +76,7 @@ public class CandidateDBStore {
             ps.setInt(5, candidate.getId());
             ps.execute();
         } catch (Exception e) {
-            LOG.error("Error", e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -87,11 +87,12 @@ public class CandidateDBStore {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new Candidate(it.getInt("id"), it.getString("name"));
+                    return new Candidate(it.getInt("id"), it.getString("name"), it.getString("description"),
+                            it.getBytes("photo"), it.getString("created"));
                 }
             }
         } catch (Exception e) {
-            LOG.error("Error", e);
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }

@@ -36,7 +36,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            LOG.error("Error", e);
+            LOG.error(e.getMessage(), e);
         }
 
         return posts;
@@ -59,7 +59,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            LOG.error("Error", e);
+            LOG.error(e.getMessage(), e);
         }
         return post;
     }
@@ -76,7 +76,7 @@ public class PostDBStore {
             ps.setInt(5, post.getId());
             ps.execute();
         } catch (Exception e) {
-            LOG.error("Error", e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -87,11 +87,12 @@ public class PostDBStore {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new Post(it.getInt("id"), it.getString("name"));
+                    return new Post(it.getInt("id"), it.getString("name"), it.getString("description"),
+                            it.getBoolean("visible"), new City(it.getInt("city_id")), it.getString("created"));
                 }
             }
         } catch (Exception e) {
-            LOG.error("Error", e);
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }
