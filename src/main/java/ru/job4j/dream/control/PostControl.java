@@ -52,5 +52,4 @@ public class PostControl {
         model.addAttribute("cities", cityService.findAll());
         return "updatePost";
     }
-
 }
