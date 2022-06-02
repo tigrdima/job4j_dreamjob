@@ -16,6 +16,7 @@ import java.util.Optional;
 @ThreadSafe
 @Repository
 public class UserDBStore {
+
     private static final Logger LOG = LoggerFactory.getLogger(CandidateDBStore.class.getName());
     private final BasicDataSource pool;
 
