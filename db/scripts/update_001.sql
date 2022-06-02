@@ -21,4 +21,5 @@ CREATE TABLE users (
   email varchar,
   password text,
   constraint email_unique unique (email)
+
 );

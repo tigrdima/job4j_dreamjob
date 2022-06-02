@@ -20,4 +20,7 @@ public class UserService {
         return userDBStore.add(user);
     }
 
+    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+        return userDBStore.findUserByEmailAndPwd(email, password);
+    }
 }
