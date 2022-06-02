@@ -67,5 +67,4 @@ public class CandidateControl {
         model.addAttribute("candidate", service.findById(id));
         return "updateCandidate";
     }
-
 }

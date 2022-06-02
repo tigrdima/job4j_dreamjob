@@ -31,5 +31,6 @@ public class CandidateService {
     public Collection<Candidate> findAll() {
         return candidateDBStore.findAll();
     }
+
 }
 
