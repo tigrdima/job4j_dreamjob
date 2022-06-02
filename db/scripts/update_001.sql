@@ -18,7 +18,7 @@ CREATE TABLE canidate (
 CREATE TABLE users (
   id serial primary key,
   name varchar,
-  email text,
+  email varchar,
   password text,
   constraint email_unique unique (email)
 );
