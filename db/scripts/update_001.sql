@@ -13,6 +13,10 @@ CREATE TABLE canidate (
    description text,
    photo bytea,
    created text
-
 );
 
+CREATE TABLE users (
+  id serial primary key,
+  name text,
+  constraint name_unique unique (name)
+);
