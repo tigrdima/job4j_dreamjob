@@ -19,4 +19,5 @@ CREATE TABLE users (
   id serial primary key,
   name text,
   constraint name_unique unique (name)
+
 );
