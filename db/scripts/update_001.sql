@@ -13,4 +13,6 @@ CREATE TABLE canidate (
    description text,
    photo bytea,
    created text
+
 );
+

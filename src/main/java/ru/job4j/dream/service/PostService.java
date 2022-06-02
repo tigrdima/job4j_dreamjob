@@ -40,5 +40,4 @@ public class PostService {
         );
         return posts;
     }
-
 }
