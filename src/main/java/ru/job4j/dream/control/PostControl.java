@@ -24,12 +24,7 @@ public class PostControl {
 
     @GetMapping("/posts")
     public String posts(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+        userSession(model, session);
         model.addAttribute("posts", postService.findAll());
         return "posts";
     }
@@ -60,5 +55,14 @@ public class PostControl {
         model.addAttribute("post", postService.findById(id));
         model.addAttribute("cities", cityService.findAll());
         return "updatePost";
+    }
+
+    private void userSession(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
     }
 }
